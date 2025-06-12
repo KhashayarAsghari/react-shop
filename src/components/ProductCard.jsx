@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { CartContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({ id, image, title, price }) {
     const { cart, setCart } = useContext(CartContext)
+    const navigate = useNavigate()
 
-    function handleAddToCart() {
+    function handleAddToCart(event) {
+        event.stopPropagation()
+
         setCart(prev => {
             if (prev.includes(id)) {
                 return prev;
@@ -19,7 +23,7 @@ export default function ProductCard({ id, image, title, price }) {
     }
 
     return (
-        <div className="rounded-sm w-full p-4 my-4 flex justify-between shadow-md">
+        <div onClick={() => navigate(`/product/${id}`)} className="rounded-sm w-full p-4 my-4 flex justify-between shadow-md">
             <img className="w-1/3 object-contain" src={image} alt="" />
             <div className="text-right flex flex-col justify-between">
                 <h3>{title}</h3>

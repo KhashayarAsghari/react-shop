@@ -5,7 +5,6 @@ import ProductCard from "../components/ProductCard";
 import { CartContext } from "../App";
 
 export default function HomePage() {
-
     const [products, setProducts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
