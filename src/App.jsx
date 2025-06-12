@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import CartPage from "./pages/CartPage"
 import useCart from "./hooks/useCart"
+import ProductPage from "./pages/ProductPage"
 
 export const CartContext = createContext()
 
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/:productId" element={<ProductPage />} />
           </Routes>
         </CartContext.Provider>
       </BrowserRouter>
