@@ -13,14 +13,11 @@ export const fetchApi = axios.create({
 
 
 
+fetchApi.interceptors.response.use(res => {
+    if (res.status === 401) {
+        location.href = "/login"
+    }
 
-// const test = new Promise((resolve, reject) => {
-//     // some codes
-//     if(condition){
-//         resolve(data)
-//     } else {
-//         reject(error)
-//     }
-// })
-
-// test().then(response => console.log(response)).catch((err) => console.log(err))
+    // return { data: { ...res.data }, statusCode: res.status }
+    return res.data
+})
