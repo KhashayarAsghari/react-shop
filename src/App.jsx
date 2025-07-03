@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect } from "react"
+import { createContext, useCallback, useEffect, useReducer } from "react"
 import { useState } from "react"
 import Header from "./components/Header"
 import BottomNavbar from "./components/BottomNavbar"
@@ -9,12 +9,16 @@ import CartPage from "./pages/CartPage"
 import useCart from "./hooks/useCart"
 import ProductPage from "./pages/ProductPage"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import cartReducer from "./reducers/CartReducer"
 
 export const CartContext = createContext()
 const queryClient = new QueryClient()
 
 function App() {
-  const [cart, setCart] = useCart()
+  // const [cart, setCart] = useCart()
+
+  const [cart, dispatch] = useReducer(cartReducer, JSON.parse(localStorage.getItem("cart")) ?? [])
+
 
   return (
     <>
@@ -22,7 +26,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <CartContext.Provider value={{
             cart,
-            setCart
+            dispatch
           }}>
             <Routes>
               <Route path="/" element={<HomePage />} />
